@@ -75,6 +75,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>
+      </EnableModules>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,6 +114,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BayesClassifier.hpp" />
+    <ClInclude Include="Classifier.hpp" />
+    <ClInclude Include="CsvParser.hpp" />
+    <ClInclude Include="Features.hpp" />
+    <ClInclude Include="FeatureSet.hpp" />
+    <ClInclude Include="Glass.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CategorizedObject.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
