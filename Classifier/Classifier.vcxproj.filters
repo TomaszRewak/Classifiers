@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Classifier">
-      <UniqueIdentifier>{a2e4d840-b11d-49b9-aaf4-08607bf66b7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Bayes">
       <UniqueIdentifier>{f9442507-7c27-4466-b30c-523259b435bd}</UniqueIdentifier>
     </Filter>
@@ -20,16 +17,22 @@
     <Filter Include="Test">
       <UniqueIdentifier>{16357143-c752-466f-a289-38aa68e92cff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Transformation">
+      <UniqueIdentifier>{dc1064d2-72a4-433d-acb9-b7c88bfe26a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Validation">
+      <UniqueIdentifier>{ba4f90d9-7955-49e2-85bd-5a111f5d0491}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClassSet.hpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Classifier.hpp">
-      <Filter>Classifier</Filter>
-    </ClInclude>
     <ClInclude Include="BayesClassifier.hpp">
       <Filter>Bayes</Filter>
     </ClInclude>
@@ -45,10 +48,35 @@
     <ClInclude Include="Glass.hpp">
       <Filter>Test</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CategorizedObject.hpp">
-      <Filter>Classifier</Filter>
-    </None>
+    <ClInclude Include="Transformer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="DecimalDiscretizer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="EvenDecimalDiscretizer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossValidator.hpp">
+      <Filter>Validation</Filter>
+    </ClInclude>
+    <ClInclude Include="Iris.hpp">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit.hpp">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscreteDiscretizer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="Ecoli.hpp">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfusionMatrix.hpp">
+      <Filter>Validation</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidationStatistics.hpp">
+      <Filter>Validation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

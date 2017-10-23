@@ -9,9 +9,10 @@
 namespace Classifier::Data
 {
 	template<class ...FeatureTypes>
-	class FeatureSet {
+	class FeatureSet : public std::vector<Features<FeatureTypes...>> {
 	private:
-		std::vector<Features<FeatureTypes...>> features;
+		template<size_t N>
+		using NthType = typename std::tuple_element<N, std::tuple<FeatureTypes...>>::type;
 
 		template<typename... NewFearureTyps>
 		auto make_newSet(Features<NewFearureTyps...>) const 
@@ -20,19 +21,18 @@ namespace Classifier::Data
 		}
 
 	public:
-		void add(FeatureTypes... values)
-		{
-			features.push_back(Features<FeatureTypes...>(values...));
-		}
+		template<size_t N>
+		using type = NthType<N>;
 
-		void add(const Features<FeatureTypes...>& newFearures)
+		using std::vector<Features<FeatureTypes...>>::push_back;
+		void push_back(FeatureTypes... values)
 		{
-			features.push_back(newFearures);
+			std::vector<Features<FeatureTypes...>>::push_back(Features<FeatureTypes...>(values...));
 		}
 
 		void print() const
 		{
-			for (auto& object : features)
+			for (auto& object : *this)
 			{
 				object.print();
 
@@ -40,73 +40,34 @@ namespace Classifier::Data
 			}
 		}
 
-		template<size_t Index, typename Function>
-		auto transform(Function transformer) const
+	public:
+		template<size_t N>
+		class FreatureIterator : public std::iterator<std::forward_iterator_tag, NthType<N>>
 		{
-			using NewSet = decltype(make_newSet(features[0].transform<Index>(transformer)));
+		private:
+			typename std::vector<Features<FeatureTypes...>>::iterator iter;
 
-			NewSet newSet;
+		public:
+			FreatureIterator(typename std::vector<Features<FeatureTypes...>>::iterator iter) :
+				iter(iter)
+			{ }
+			FreatureIterator(const FreatureIterator<N>& mit) : iter(mit.iter) {}
 
-			for (auto& object : features)
-			{
-				newSet.add(object.transform<Index>(transformer));
-			}
+			FreatureIterator<N>& operator++() { ++iter; return *this; }
+			FreatureIterator<N> operator++(int) { FreatureIterator<N> tmp(*this); operator++(); return tmp; }
+			bool operator==(const FreatureIterator<N>& rhs) const { return iter == rhs.iter; }
+			bool operator!=(const FreatureIterator<N>& rhs) const { return iter != rhs.iter; }
+			bool operator<(const FreatureIterator<N>& rhs) const { return iter < rhs.iter; }
+			NthType<N>& operator*() { return std::get<N>(*iter); }
+		};
 
-			return newSet;
-		}
+		using std::vector<Features<FeatureTypes...>>::begin;
+		using std::vector<Features<FeatureTypes...>>::end;
 
-		template<size_t Index>
-		auto remove() const
-		{
-			using NewSet = decltype(make_newSet(features[0].remove<Index>()));
+		template<size_t N>
+		FreatureIterator<N> beginF() { return FreatureIterator<N>(this->begin()); }
 
-			NewSet newSet;
-
-			for (auto& object : features)
-			{
-				newSet.add(object.remove<Index>());
-			}
-
-			return newSet;
-		}
-
-		template<typename Type>
-		auto add() const
-		{
-			using NewSet = decltype(make_newSet(features[0].add<Type>()));
-
-			NewSet newSet;
-
-			for (auto& object : features)
-			{
-				newSet.add(object.add<Type>());
-			}
-
-			return newSet;
-		}
-
-		template<size_t First, size_t Second>
-		auto reorder() const
-		{
-			using NewSet = decltype(make_newSet(features[0].reorder<First, Second>()));
-
-			NewSet newSet;
-
-			for (auto& object : features)
-			{
-				newSet.add(object.reorder<First, Second>());
-			}
-
-			return newSet;
-		}
-
-		template<typename Function>
-		auto process(Function& function) const
-		{
-			for (auto& object : features)
-			{
-				function(object);
-			}
-		}
+		template<size_t N>
+		FreatureIterator<N> endF() { return FreatureIterator<N>(this->end()); }
 	};
 }

@@ -10,18 +10,7 @@ namespace Classifier::Data
 	{
 	private:
 #pragma region Variadic Templates
-		template<size_t Offset = 0>
-		constexpr auto order() const { return std::make_index_sequence<sizeof...(FeatureTypes) + Offset>{}; };
-
-		template<size_t Index, size_t... Order>
-		constexpr auto orderWithout(std::index_sequence<Order...>) const {
-			return std::index_sequence<(Order + (Order >= Index ? 1 : 0))...>{};
-		}
-
-		template<size_t Index>
-		constexpr auto orderWithout() const {
-			return orderWithout<Index>(order<-1>());
-		}
+		constexpr auto order() const { return std::make_index_sequence<sizeof...(FeatureTypes)>{}; };
 #pragma endregion
 
 		template<size_t Index, typename Function>
@@ -44,7 +33,44 @@ namespace Classifier::Data
 			return Features<NewFreatureTypes...>(values...);
 		}
 
+		template<size_t ...Order>
+		void print_v(std::index_sequence<Order...>) const
+		{
+			int _[] = { (std::cout << get<Order>() << "\t", 0)... };
+		}
+
+		template<typename T, size_t Index>
+		T get_r(std::true_type)
+		{
+			return std::get<Index>(*this);
+		}
+
+		template<typename T, size_t Index>
+		T get_r(std::false_type)
+		{
+			throw "Wrong type exception";
+		}
+
+		template<typename T>
+		T get_v(size_t index, std::index_sequence<>)
+		{
+			throw "Index out of bounds exception";
+		}
+
+		template<typename T, size_t Index, size_t ...Next>
+		T get_v(size_t index, std::index_sequence<Index, Next...>)
+		{
+			using T1 = decltype(std::get<Index>(*this));
+
+			if (index == 0)
+				return get_r<T, Index>(std::is_assignable<T1, T>{});
+			else
+				return get_v<T, Next...>(index - 1, std::index_sequence<Next...>{});
+		}
+
 	public:
+		constexpr size_t size() { return sizeof...(FeatureTypes); }
+
 		Features() {
 
 		}
@@ -52,65 +78,21 @@ namespace Classifier::Data
 		Features(FeatureTypes ...values) : std::tuple<FeatureTypes...>(values...) {
 		}
 
-		template<size_t ...Order>
-		void print(std::index_sequence<Order...>) const
+		template<size_t Index> 
+		auto get() const
 		{
-			int _[] = { (std::cout << std::get<Order>(*this) << "\t", 0)... };
+			return std::get<Index>(*this);
+		}
+
+		template<typename T>
+		T get(size_t index)
+		{
+			return get_v<T>(index, order());
 		}
 
 		void print() const
 		{
-			print(order());
-		}
-
-		template<size_t Index, typename Function, size_t ...Order>
-		auto transform(Function function, std::index_sequence<Order...>) const
-		{
-			auto transformers = std::make_tuple((get_transformer<Order>(function, std::integral_constant<bool, Order == Index>{}))...);
-
-			return makeNew((std::get<Order>(transformers)(std::get<Order>(*this)))...);
-		}
-
-		template<size_t Index, typename Function>
-		auto transform(Function function) const
-		{
-			return transform<Index>(function, order());
-		}
-
-		template<size_t Index, size_t ...Order>
-		auto remove(std::index_sequence<Order...>) const
-		{
-			return makeNew((std::get<Order>(*this))...);
-		}
-
-		template<size_t Index>
-		auto remove() const
-		{
-			return remove<Index>(orderWithout<Index>());
-		}
-
-		template<typename Type, size_t ...Order>
-		auto add(std::index_sequence<Order...>) const
-		{
-			return makeNew((std::get<Order>(*this))..., Type());
-		}
-
-		template<typename Type>
-		auto add() const
-		{
-			return add<Type>(order());
-		}
-
-		template<size_t First, size_t Second, size_t ...Order>
-		auto reorder(std::index_sequence<Order...>) const
-		{
-			return makeNew((std::get<(Order == First ? Second : Order == Second ? First : Order)>(*this))...);
-		}
-
-		template<size_t First, size_t Second>
-		auto reorder() const
-		{
-			return reorder<First, Second>(order<>());
+			print_v(order());
 		}
 	};
 }
