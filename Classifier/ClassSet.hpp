@@ -6,7 +6,5 @@ namespace Classifier::Data
 {
 	template<typename ClassType>
 	class ClassSet : public std::vector<ClassType>
-	{
-
-	};
+	{ };
 }

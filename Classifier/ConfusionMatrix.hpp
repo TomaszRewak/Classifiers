@@ -9,7 +9,7 @@ namespace Classifier::Validation
 	{
 		T positiveValue;
 
-		int count = 0;
+		int acc = 0;
 
 		int TP = 0,
 			FP = 0,
@@ -22,7 +22,8 @@ namespace Classifier::Validation
 
 		void add(T& predicted, T& expected)
 		{
-			count++;
+			if (predicted == expected)
+				acc++;
 
 			if (predicted == positiveValue)
 			{
@@ -42,7 +43,18 @@ namespace Classifier::Validation
 
 		ValidationStatistics get()
 		{
-			return ValidationStatistics(TP, TN, FP, FN);
+			return ValidationStatistics(acc, TP, TN, FP, FN);
 		}
 	};
+
+	template<typename T>
+	std::ostream& operator<<(std::ostream& stream, ConfusionMatrix<T>& cm)
+	{
+		std::cout << "for: " << cm.positiveValue << std::endl;
+		std::cout << " \t P \t N" << std::endl;
+		std::cout << "P \t " << cm.TP << " \t " << cm.FN << std::endl;
+		std::cout << "N \t " << cm.FP << " \t " << cm.TN << std::endl;
+
+		return stream;
+	}
 }

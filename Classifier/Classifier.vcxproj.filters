@@ -23,6 +23,18 @@
     <Filter Include="Validation">
       <UniqueIdentifier>{ba4f90d9-7955-49e2-85bd-5a111f5d0491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test\Bayes">
+      <UniqueIdentifier>{5e1d22a7-23dc-4ce9-9e51-3fa2b426fe6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\ILA">
+      <UniqueIdentifier>{889ddd68-9feb-4ab9-a79b-bd1420a89497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Readers">
+      <UniqueIdentifier>{50d22d3f-8dd8-4009-9588-8535897fb68e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ILA">
+      <UniqueIdentifier>{acf0fa7a-c5b1-46fe-937d-f53d3296ace1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -45,9 +57,6 @@
     <ClInclude Include="CsvParser.hpp">
       <Filter>Parser</Filter>
     </ClInclude>
-    <ClInclude Include="Glass.hpp">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="Transformer.hpp">
       <Filter>Data\Transformation</Filter>
     </ClInclude>
@@ -60,23 +69,68 @@
     <ClInclude Include="CrossValidator.hpp">
       <Filter>Validation</Filter>
     </ClInclude>
-    <ClInclude Include="Iris.hpp">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit.hpp">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="DiscreteDiscretizer.hpp">
       <Filter>Data\Transformation</Filter>
-    </ClInclude>
-    <ClInclude Include="Ecoli.hpp">
-      <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="ConfusionMatrix.hpp">
       <Filter>Validation</Filter>
     </ClInclude>
     <ClInclude Include="ValidationStatistics.hpp">
       <Filter>Validation</Filter>
+    </ClInclude>
+    <ClInclude Include="BayesClassifierBuilder.hpp">
+      <Filter>Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="DecimalDiscretizerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscreteDiscretizerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="EvenDecimalDiscretizerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossValidatorBuilder.hpp">
+      <Filter>Validation</Filter>
+    </ClInclude>
+    <ClInclude Include="KMeansDiscretizer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="KMeansDiscretizerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBayesClassifier.hpp">
+      <Filter>Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBayesClassifierBuilder.hpp">
+      <Filter>Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="BayesCreditTest.hpp">
+      <Filter>Test\Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="BayesEcoliTest.hpp">
+      <Filter>Test\Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="BayesGlassTest.hpp">
+      <Filter>Test\Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="BayesIrisTest.hpp">
+      <Filter>Test\Bayes</Filter>
+    </ClInclude>
+    <ClInclude Include="IrisReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAIrisTest.hpp">
+      <Filter>Test\ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAClassifier.hpp">
+      <Filter>ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAClassifierBuilder.hpp">
+      <Filter>ILA</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

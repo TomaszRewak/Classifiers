@@ -3,10 +3,12 @@
 #include <iostream>
 #include <string>
 
-#include "Iris.hpp"
-#include "Glass.hpp"
-#include "Credit.hpp"
-#include "Ecoli.hpp"
+#include "BayesIrisTest.hpp"
+#include "BayesGlassTest.hpp"
+#include "BayesCreditTest.hpp"
+#include "BayesEcoliTest.hpp"
+
+#include "ILAIrisTest.hpp"
 
 using namespace std;
 
@@ -14,10 +16,12 @@ int main()
 {
 	ios_base::sync_with_stdio(false);
 
-	Classifier::Test::Iris::iris_test();
-	Classifier::Test::Glass::glass_test();
-	Classifier::Test::Credit::credit_test();
-	Classifier::Test::Ecoli::ecoli_test();
+	//Classifier::Test::BayesTest::iris_bayes_test();
+	//Classifier::Test::BayesTest::glass_bayes_test();
+	//Classifier::Test::BayesTest::credit_bayes_test();
+	//Classifier::Test::BayesTest::ecoli_bayes_test();
+
+	Classifier::Test::ILATest::iris_ila_test();
 
 	getchar();
 }

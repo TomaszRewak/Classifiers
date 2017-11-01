@@ -32,17 +32,17 @@ namespace Classifier::Validation
 			classes(classes),
 			features(features)
 		{
+			for (Class& c : classes)
+				uniqueClasses.insert(c);
+		}
+
+		ValidationStatistics validate(size_t chunks)
+		{
 			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
 			std::shuffle(this->classes.begin(), this->classes.end(), std::default_random_engine(seed));
 			std::shuffle(this->features.begin(), this->features.end(), std::default_random_engine(seed));
 
-			for (Class& c : classes)
-				uniqueClasses.insert(c);
-		}
-
-		void validate(size_t chunks)
-		{
 			ValidationStatistics metrices;
 
 			int totalCount = classes.size();
@@ -93,6 +93,7 @@ namespace Classifier::Validation
 				for (ConfusionMatrix<Class>& cm : confusionMatrixes) {
 					auto classMetrices = cm.get();
 					
+					//std::cout << cm;
 					//std::cout << classMetrices;
 
 					chunkMetrices += classMetrices;
@@ -104,20 +105,9 @@ namespace Classifier::Validation
 				//cout << std::endl;
 			}
 
-			std::cout << metrices;
-		}
-	};
+			//std::cout << metrices;
 
-	class CrossValidatorBuilder
-	{
-	public:
-		template<typename Builder, typename Class, typename ...Ts>
-		static CrossValidator<Builder, Class, Ts...> from(
-			Builder builder,
-			Data::ClassSet<Class> classes,
-			Data::FeatureSet<Ts...> features)
-		{
-			return CrossValidator<Builder, Class, Ts...>(builder, classes, features);
+			return metrices;
 		}
 	};
 }

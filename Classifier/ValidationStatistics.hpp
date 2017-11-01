@@ -40,6 +40,7 @@ namespace Classifier::Validation
 
 	struct ValidationStatistics
 	{
+		Metrice totalAcc;
 		Metrice acc;
 		Metrice prec;
 		Metrice rec;
@@ -48,9 +49,14 @@ namespace Classifier::Validation
 		ValidationStatistics()
 		{ }
 
-		ValidationStatistics(int TP, int TN, int FP, int FN)
+		ValidationStatistics(int accuracy, int TP, int TN, int FP, int FN)
 		{
 			int total = TP + TN + FP + FN;
+
+			totalAcc = Metrice(
+				(double)accuracy / (TP + TN + FP + FN),
+				total
+			);
 
 			acc = Metrice(
 				(double)(TP + TN) / (TP + TN + FP + FN), 
@@ -78,6 +84,7 @@ namespace Classifier::Validation
 
 		void operator+=(const ValidationStatistics& second)
 		{
+			totalAcc = totalAcc + second.totalAcc;
 			acc = acc + second.acc;
 			prec = prec + second.prec;
 			rec = rec + second.rec;
@@ -87,7 +94,8 @@ namespace Classifier::Validation
 
 	std::ostream& operator<<(std::ostream& stream, const ValidationStatistics& stats)
 	{
-		std::cout 
+		std::cout
+			<< "totalAcc (" << stats.totalAcc << "), \t"
 			<< "acc (" << stats.acc << "), \t" 
 			<< "prec (" << stats.prec << "), \t"
 			<< "rec (" << stats.rec << "), \t" 

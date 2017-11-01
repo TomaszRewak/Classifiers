@@ -6,7 +6,7 @@
 
 #include "FeatureSet.hpp"
 
-namespace Classifier::Bayes
+namespace Classifier::ILA
 {
 	template<typename Class, size_t Features>
 	using ClassCardinality = std::map<Class, int>;
@@ -15,14 +15,14 @@ namespace Classifier::Bayes
 	using FeaturesCardinality = std::map<Class, std::array<std::map<int, int>, Features>>;
 
 	template<typename Class, size_t Features>
-	class BayesClassifier
+	class ILAClassifier
 	{
 	private:
 		ClassCardinality<Class, Features> classCardinality;
 		FeaturesCardinality<Class, Features> featuresCardinality;
 
 	public:
-		BayesClassifier(ClassCardinality<Class, Features> classCardinality, FeaturesCardinality<Class, Features> featuresCardinality) :
+		ILAClassifier(ClassCardinality<Class, Features> classCardinality, FeaturesCardinality<Class, Features> featuresCardinality) :
 			classCardinality(classCardinality), featuresCardinality(featuresCardinality)
 		{ }
 
