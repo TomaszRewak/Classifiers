@@ -8,53 +8,62 @@
 
 namespace Classifier::ILA
 {
-	template<typename Class, size_t Features>
-	using ClassCardinality = std::map<Class, int>;
+	struct ILACondition
+	{
+		bool selected = false;
+		int value = 0;
+	};
 
-	template<typename Class, size_t Features>
-	using FeaturesCardinality = std::map<Class, std::array<std::map<int, int>, Features>>;
+	template<typename Class, typename ...Ts>
+	struct ILARule
+	{
+		std::array<ILACondition, sizeof...(Ts)> conditions;
+		Class result;
 
-	template<typename Class, size_t Features>
+		ILARule()
+		{ }
+
+		ILARule(Class result) :
+			result(result)
+		{ }
+
+		bool match(Data::Features<Ts...>& data)
+		{
+			for (size_t i = 0; i < conditions.size(); i++)
+			{
+				ILACondition& condition = conditions[i];
+
+				if (condition.selected && data.get<int>(i) != condition.value)
+					return false;
+			}
+
+			return true;
+		}
+	};
+
+	template<typename Class, typename ...Ts>
+	using ILARules = std::vector<ILARule<Class, Ts...>>;
+
+	template<typename Class, typename ...Ts>
 	class ILAClassifier
 	{
 	private:
-		ClassCardinality<Class, Features> classCardinality;
-		FeaturesCardinality<Class, Features> featuresCardinality;
+		Class defaultClass;
+		ILARules<Class, Ts...> rules;
 
 	public:
-		ILAClassifier(ClassCardinality<Class, Features> classCardinality, FeaturesCardinality<Class, Features> featuresCardinality) :
-			classCardinality(classCardinality), featuresCardinality(featuresCardinality)
+		ILAClassifier(ILARules<Class, Ts...> rules, Class defaultClass) :
+			rules(rules), defaultClass(defaultClass)
 		{ }
 
 		template<typename ...Ts>
 		Class classify(Data::Features<Ts...> specimen)
 		{
-			Class bestClass;
-			double bestClassProbability = -1;
+			for (auto& rule : rules)
+				if (rule.match(specimen))
+					return rule.result;
 
-			for (auto& c : classCardinality)
-			{
-				Class currentClass = c.first;
-
-				double currentClassCardinality = c.second;
-				double currentFeaturesProbability = 1;
-
-				for (int i = 0; i < Features; i++)
-				{
-					currentFeaturesProbability *= featuresCardinality[currentClass][i][specimen.get<int>(i)];
-					currentFeaturesProbability /= currentClassCardinality;
-				}
-
-				double probability = currentClassCardinality * currentFeaturesProbability;
-
-				if (probability > bestClassProbability)
-				{
-					bestClass = currentClass;
-					bestClassProbability = probability;
-				}
-			}
-
-			return bestClass;
+			return defaultClass;
 		}
 	};
 }

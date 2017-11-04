@@ -132,5 +132,26 @@
     <ClInclude Include="ILAClassifierBuilder.hpp">
       <Filter>ILA</Filter>
     </ClInclude>
+    <ClInclude Include="ILACreditTest.hpp">
+      <Filter>Test\ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClInclude>
+    <ClInclude Include="GlassReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAGlassTest.hpp">
+      <Filter>Test\ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAEcoliTest.hpp">
+      <Filter>Test\ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="EcoliReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILAExampleTest.hpp">
+      <Filter>Test\ILA</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

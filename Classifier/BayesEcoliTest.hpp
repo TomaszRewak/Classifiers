@@ -14,51 +14,20 @@
 #include "BayesClassifierBuilder.hpp"
 #include "GaussianBayesClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
+#include "EcoliReader.hpp"
 
 using namespace std;
 using namespace Classifier::Data;
 using namespace Classifier::Data::Transformation;
+using namespace Classifier::Test::Readers;
 
 
 namespace Classifier::Test::BayesTest {
 	void ecoli_bayes_test()
 	{
-		cout << "ECOLI" << endl;
+		cout << "BAYES ECOLI" << endl;
 
-		using InitialSetType = FeatureSet<double, double, double, double, double, double, double>;
-		using ClassSetType = ClassSet<string>;
-
-		InitialSetType initialSet;
-		ClassSetType classSet;
-
-		Parser::CsvParser input;
-		input.open("../Data/ecoli.data");
-		for (int i = 0; i < 336; i++)
-		{
-			string name;
-			double mcg;
-			double gvh;
-			double lip;
-			double chg;
-			double aac;
-			double alm1;
-			double alm2;
-			string type;
-
-			name = input.get<string>();
-			mcg = input.get<double>();
-			gvh = input.get<double>();
-			lip = input.get<double>();
-			chg = input.get<double>();
-			aac = input.get<double>();
-			alm1 = input.get<double>();
-			alm2 = input.get<double>();
-			type = input.get<string>();
-
-			initialSet.push_back(mcg, gvh, lip, chg, aac, alm1, alm2);
-			classSet.push_back(type);
-		}
-		input.close();
+		auto[initialSet, classSet] = EcoliReader::read();
 
 		//for (int i = 5; i < 100; i += 5)
 		//{

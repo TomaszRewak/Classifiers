@@ -14,57 +14,19 @@
 #include "BayesClassifierBuilder.hpp"
 #include "GaussianBayesClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
+#include "GlassReader.hpp"
 
 using namespace std;
 using namespace Classifier::Data;
 using namespace Classifier::Data::Transformation;
-
+using namespace Classifier::Test::Readers;
 
 namespace Classifier::Test::BayesTest {
 	void glass_bayes_test()
 	{
-		cout << "GLASS" << endl;
+		cout << "BAYES GLASS" << endl;
 
-		using InitialSetType = FeatureSet<double, double, double, double, double, double, double, double, double>;
-		using ClassSetType = ClassSet<int>;
-
-		InitialSetType initialSet;
-		ClassSetType classSet;
-
-		Parser::CsvParser input;
-		input.open("../Data/glass.data");
-		for (int i = 0; i < 214; i++)
-		{
-			int Id = input.get<int>();
-			double RI = input.get<double>();
-			double Na = input.get<double>();
-			double Mg = input.get<double>();
-			double Al = input.get<double>();
-			double Si = input.get<double>();
-			double K = input.get<double>();
-			double Ca = input.get<double>();
-			double Ba = input.get<double>();
-			double Fe = input.get<double>();
-			int Type = input.get<int>();
-
-			//if (Type == 1 || Type == 3)
-			//	Type = 100;
-			//else if (Type == 2 || Type == 4)
-			//	Type = 101;
-			//else 
-			//	Type = 102;
-
-			//if (Type == 1 || Type == 2)
-			//	Type = 100;
-			//else if (Type == 3 || Type == 4)
-			//	Type = 101;
-			//else 
-			//	Type = 102;
-
-			initialSet.push_back(RI, Na, Mg, Al, Si, K, Ca, Ba, Fe);
-			classSet.push_back(Type);
-		}
-		input.close();
+		auto[initialSet, classSet] = GlassReader::read();
 
 		/*for (int i = 2; i < 30; i+=2)
 		{

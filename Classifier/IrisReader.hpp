@@ -7,15 +7,9 @@
 #include "CsvParser.hpp"
 #include "FeatureSet.hpp"
 #include "ClassSet.hpp"
-#include "TransformerBuilder.hpp"
-#include "DecimalDiscretizerBuilder.hpp"
-#include "EvenDecimalDiscretizerBuilder.hpp"
-#include "BayesClassifierBuilder.hpp"
-#include "CrossValidatorBuilder.hpp"
 
 using namespace std;
 using namespace Classifier::Data;
-using namespace Classifier::Data::Transformation;
 
 namespace Classifier::Test::Readers 
 {

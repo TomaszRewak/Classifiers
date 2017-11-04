@@ -94,6 +94,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -122,6 +125,7 @@
     <ClInclude Include="BayesClassifierBuilder.hpp" />
     <ClInclude Include="ConfusionMatrix.hpp" />
     <ClInclude Include="BayesCreditTest.hpp" />
+    <ClInclude Include="CreditReader.hpp" />
     <ClInclude Include="CrossValidator.hpp" />
     <ClInclude Include="CrossValidatorBuilder.hpp" />
     <ClInclude Include="CsvParser.hpp" />
@@ -130,6 +134,7 @@
     <ClInclude Include="DiscreteDiscretizer.hpp" />
     <ClInclude Include="DiscreteDiscretizerBuilder.hpp" />
     <ClInclude Include="BayesEcoliTest.hpp" />
+    <ClInclude Include="EcoliReader.hpp" />
     <ClInclude Include="EvenDecimalDiscretizer.hpp" />
     <ClInclude Include="EvenDecimalDiscretizerBuilder.hpp" />
     <ClInclude Include="Features.hpp" />
@@ -138,8 +143,13 @@
     <ClInclude Include="GaussianBayesClassifierBuilder.hpp" />
     <ClInclude Include="BayesGlassTest.hpp" />
     <ClInclude Include="BayesIrisTest.hpp" />
+    <ClInclude Include="GlassReader.hpp" />
     <ClInclude Include="ILAClassifier.hpp" />
     <ClInclude Include="ILAClassifierBuilder.hpp" />
+    <ClInclude Include="ILACreditTest.hpp" />
+    <ClInclude Include="ILAEcoliTest.hpp" />
+    <ClInclude Include="ILAExampleTest.hpp" />
+    <ClInclude Include="ILAGlassTest.hpp" />
     <ClInclude Include="ILAIrisTest.hpp" />
     <ClInclude Include="IrisReader.hpp" />
     <ClInclude Include="KMeansDiscretizer.hpp" />
