@@ -50,6 +50,6 @@ namespace Classifier::Test::BayesTest {
 		{
 			stats += crossValidator.validate(10);
 		}
-		cout << stats;
+		cout << stats << endl;
 	}
 }

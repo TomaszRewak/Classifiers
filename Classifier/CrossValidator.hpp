@@ -15,7 +15,7 @@ namespace Classifier::Validation
 	class CrossValidator
 	{
 	private:
-		Builder builder;
+		Builder& builder;
 
 		std::set<Class> uniqueClasses;
 
@@ -24,7 +24,7 @@ namespace Classifier::Validation
 
 	public:
 		CrossValidator(
-			Builder builder,
+			Builder& builder,
 			Data::ClassSet<Class> classes,
 			Data::FeatureSet<Ts...> features
 		) :
@@ -50,6 +50,8 @@ namespace Classifier::Validation
 
 			for (int i = 0; i < chunks; i++)
 			{
+				int insideAcceptedSetOfClasses = 0;
+
 				Data::ClassSet<Class> trainClasses, testClasses;
 				Data::FeatureSet<Ts...> trainFeatures, testFeatures;
 
@@ -69,7 +71,6 @@ namespace Classifier::Validation
 
 				auto classifier = builder(trainClasses, trainFeatures);
 
-				int positive = 0;
 				std::vector<ConfusionMatrix<Class>> confusionMatrixes;
 				for (const Class& c : uniqueClasses)
 					confusionMatrixes.push_back(ConfusionMatrix<Class>(c));
@@ -79,33 +80,28 @@ namespace Classifier::Validation
 					Class realClass = testClasses[j];
 					Class predictedClass = classifier.classify(testFeatures[j]);
 
-					if (realClass == predictedClass)
-						positive++;
+					if (uniqueClasses.count(predictedClass))
+						insideAcceptedSetOfClasses++;
 
 					for (ConfusionMatrix<Class>& cm : confusionMatrixes)
 						cm.add(predictedClass, realClass);
 				}
 
-				//cout << positive << "/" << testClasses.size() << " (" << (100 * positive / testClasses.size()) << "%)" << endl;
-
 				ValidationStatistics chunkMetrices;
 
 				for (ConfusionMatrix<Class>& cm : confusionMatrixes) {
 					auto classMetrices = cm.get();
-					
-					//std::cout << cm;
-					//std::cout << classMetrices;
 
 					chunkMetrices += classMetrices;
+
+					if (uniqueClasses.size() == 2)
+						break;
 				}
 
+				chunkMetrices.inside = Metrice((double)insideAcceptedSetOfClasses / testClasses.size(), testClasses.size());
+
 				metrices += chunkMetrices;
-
-				//std::cout << chunkMetrices;
-				//cout << std::endl;
 			}
-
-			//std::cout << metrices;
 
 			return metrices;
 		}

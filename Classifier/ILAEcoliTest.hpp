@@ -38,14 +38,19 @@ namespace Classifier::Test::ILATest {
 			.add<5, int>(EvenDecimalDiscretizerBuilder::from<5>(5, initialSet))
 			.add<6, int>(EvenDecimalDiscretizerBuilder::from<6>(5, initialSet))
 			.transform();
-
+		
+		auto builder = ILA::ILAClassifierBuilder::builder<string, 7>(" cp");
+		
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			ILA::ILAClassifierBuilder::builder<string, 7>("other"),
+			builder,
 			classSet,
 			featureSet
 		);
-
-		Validation::ValidationStatistics stats = crossValidator.validate(10);
-		cout << stats;
+		
+		Validation::ValidationStatistics stats;
+		for(int i = 0; i < 10; i++)
+			stats = crossValidator.validate(10);
+		
+		cout << stats << builder.usedExamples() << endl;
 	}
 }

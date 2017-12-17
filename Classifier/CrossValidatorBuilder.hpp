@@ -9,7 +9,7 @@ namespace Classifier::Validation
 	public:
 		template<typename Builder, typename Class, typename ...Ts>
 		static CrossValidator<Builder, Class, Ts...> from(
-			Builder builder,
+			Builder& builder,
 			Data::ClassSet<Class> classes,
 			Data::FeatureSet<Ts...> features)
 		{

@@ -35,6 +35,18 @@
     <Filter Include="ILA">
       <UniqueIdentifier>{acf0fa7a-c5b1-46fe-937d-f53d3296ace1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test\KNN">
+      <UniqueIdentifier>{1c4103bd-08b6-4320-aaba-6421d7c683b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KNN">
+      <UniqueIdentifier>{ccb38324-2f4b-4a0b-8ea9-1a9196c64dc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KNN\Distance">
+      <UniqueIdentifier>{9ba8aa4d-f9f3-4a1b-94b5-23aaf8cf7a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KNN\Voting">
+      <UniqueIdentifier>{6ade5a61-6fb4-4ed7-8e22-e87d16ef9260}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -152,6 +164,27 @@
     </ClInclude>
     <ClInclude Include="ILAExampleTest.hpp">
       <Filter>Test\ILA</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNClassifier.hpp">
+      <Filter>KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNClassifierBuilder.hpp">
+      <Filter>KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNIrisTest.hpp">
+      <Filter>Test\KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="DecimalNormalizer.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="DecimalNormalizerBuilder.hpp">
+      <Filter>Data\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="EuclideanDistance.hpp">
+      <Filter>KNN\Distance</Filter>
+    </ClInclude>
+    <ClInclude Include="FrequencyVoting.hpp">
+      <Filter>KNN\Voting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,19 +27,22 @@ namespace Classifier::Test::ILATest {
 		auto[initialSet, classSet] = IrisReader::read();
 
 		auto featureSet = TransformerBuilder::from(initialSet)
-			.add<0, int>(EvenDecimalDiscretizerBuilder::from<0>(3, initialSet))
-			.add<1, int>(EvenDecimalDiscretizerBuilder::from<1>(3, initialSet))
-			.add<2, int>(EvenDecimalDiscretizerBuilder::from<2>(3, initialSet))
-			.add<3, int>(EvenDecimalDiscretizerBuilder::from<3>(3, initialSet))
+			.add<0, int>(EvenDecimalDiscretizerBuilder::from<0>(5, initialSet))
+			.add<1, int>(EvenDecimalDiscretizerBuilder::from<1>(5, initialSet))
+			.add<2, int>(EvenDecimalDiscretizerBuilder::from<2>(5, initialSet))
+			.add<3, int>(EvenDecimalDiscretizerBuilder::from<3>(5, initialSet))
 			.transform();
 
+		auto builder = ILA::ILAClassifierBuilder::builder<string, 4>("other");
+
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			ILA::ILAClassifierBuilder::builder<string, 4>("other"),
+			builder,
 			classSet,
 			featureSet
 		);
 
 		Validation::ValidationStatistics stats = crossValidator.validate(10);
-		cout << stats;
+
+		cout << stats << builder.usedExamples() << endl;
 	}
 }

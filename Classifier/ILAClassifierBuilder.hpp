@@ -59,6 +59,8 @@ namespace Classifier::ILA
 		struct Builder {
 		private:
 			Class defaultClass;
+			int actuallyMarked = 0,
+				toBeMarked = 0;
 
 		public:
 			Builder(Class defaultClass) : defaultClass(defaultClass)
@@ -149,9 +151,21 @@ namespace Classifier::ILA
 						else
 							j++;
 					}
+
+					for (int i = 0; i < currentClassExamples.size(); i++)
+					{
+						toBeMarked++;
+						if (marked[i])
+							actuallyMarked++;
+					}
 				}
 
 				return ILAClassifier<Class, Ts...>(rules, defaultClass);
+			}
+
+			double usedExamples()
+			{
+				return (double)actuallyMarked / toBeMarked;
 			}
 		};
 

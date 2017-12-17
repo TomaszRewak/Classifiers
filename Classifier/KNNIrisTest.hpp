@@ -8,33 +8,40 @@
 #include "FeatureSet.hpp"
 #include "ClassSet.hpp"
 #include "TransformerBuilder.hpp"
-#include "DecimalDiscretizerBuilder.hpp"
-#include "EvenDecimalDiscretizerBuilder.hpp"
-#include "BayesClassifierBuilder.hpp"
+#include "DecimalNormalizerBuilder.hpp"
+#include "KNNClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
 #include "IrisReader.hpp"
+#include "EuclideanDistance.hpp"
+#include "FrequencyVoting.hpp"
 
 using namespace std;
 using namespace Classifier::Data;
 using namespace Classifier::Data::Transformation;
 using namespace Classifier::Test::Readers;
 
-namespace Classifier::Test::BayesTest {
-	void iris_bayes_test()
+namespace Classifier::Test::KNNTest {
+	void iris_knn_test()
 	{
-		cout << "Bayes IRIS" << endl;
+		cout << "KNN Iris" << endl;
 
 		auto[initialSet, classSet] = IrisReader::read();
 
 		auto featureSet = TransformerBuilder::from(initialSet)
-			.add<0, int>(EvenDecimalDiscretizerBuilder::from<0>(5, initialSet))
-			.add<1, int>(EvenDecimalDiscretizerBuilder::from<1>(5, initialSet))
-			.add<2, int>(EvenDecimalDiscretizerBuilder::from<2>(5, initialSet))
-			.add<3, int>(EvenDecimalDiscretizerBuilder::from<3>(5, initialSet))
+			.add<0, double>(DecimalNormalizerBuilder::from<0>(initialSet))
+			.add<1, double>(DecimalNormalizerBuilder::from<1>(initialSet))
+			.add<2, double>(DecimalNormalizerBuilder::from<2>(initialSet))
+			.add<3, double>(DecimalNormalizerBuilder::from<3>(initialSet))
 			.transform();
 
+		auto builder = KNN::KNNClassifierBuilder::builder<
+			KNN::Distance::EuclideanDistance<4>,
+			KNN::Voting::FrequencyVoting<string>,
+			string, 4
+		>(5);
+
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			Bayes::BayesClassifierBuilder::builder<string, 4>(),
+			builder,
 			classSet,
 			featureSet
 		);

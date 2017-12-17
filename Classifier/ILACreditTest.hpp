@@ -26,7 +26,7 @@ namespace Classifier::Test::ILATest {
 		cout << "ILA CREDIT" << endl;
 
 		auto[initialSet, classSet] = CreditReader::read();
-
+		
 		auto featureSet = TransformerBuilder::from(initialSet)
 			.add<0, int>(DiscreteDiscretizerBuilder::from<0>(initialSet))
 			.add<1, int>(EvenDecimalDiscretizerBuilder::from<1>(3, initialSet))
@@ -44,14 +44,16 @@ namespace Classifier::Test::ILATest {
 			.add<13, int>(EvenDecimalDiscretizerBuilder::from<13>(3, initialSet))
 			.add<14, int>(EvenDecimalDiscretizerBuilder::from<14>(3, initialSet))
 			.transform();
-
+		
+		auto builder = ILA::ILAClassifierBuilder::builder<string, 15>("other");
+		
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			ILA::ILAClassifierBuilder::builder<string, 15>("other"),
+			builder,
 			classSet,
 			featureSet
 		);
 		
 		Validation::ValidationStatistics stats = crossValidator.validate(10);
-		cout << stats;
+		cout << stats << builder.usedExamples() << endl;
 	}
 }

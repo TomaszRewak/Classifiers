@@ -45,6 +45,7 @@ namespace Classifier::Validation
 		Metrice prec;
 		Metrice rec;
 		Metrice fscore;
+		Metrice inside;
 
 		ValidationStatistics()
 		{ }
@@ -89,17 +90,19 @@ namespace Classifier::Validation
 			prec = prec + second.prec;
 			rec = rec + second.rec;
 			fscore = fscore + second.fscore;
+			inside = inside + second.inside;
 		}
 	};
 
 	std::ostream& operator<<(std::ostream& stream, const ValidationStatistics& stats)
 	{
 		std::cout
-			<< "totalAcc (" << stats.totalAcc << "), \t"
-			<< "acc (" << stats.acc << "), \t" 
-			<< "prec (" << stats.prec << "), \t"
-			<< "rec (" << stats.rec << "), \t" 
-			<< "fscore (" << stats.fscore << ")" << std::endl;
+			<< stats.totalAcc << ",\t"
+			<< stats.acc << ",\t" 
+			<< stats.prec << ",\t"
+			<< stats.rec << ",\t" 
+			<< stats.fscore << ",\t"
+			<< stats.inside << ",\t";
 
 		return stream;
 	}
