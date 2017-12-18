@@ -5,7 +5,7 @@
 namespace Classifier::KNN::Distance
 {
 	template<size_t k>
-	class EuclideanDistance 
+	class ManhattanDistance
 	{
 	private:
 		template<typename>
@@ -23,7 +23,7 @@ namespace Classifier::KNN::Distance
 			double sum = 0;
 
 			for (size_t i = 0; i < k; i++)
-				sum += std::pow(a.get<double>(i) - b.get<double>(i), 2);
+				sum += std::abs(a.get<double>(i) - b.get<double>(i));
 
 			return std::sqrt(sum);
 		}

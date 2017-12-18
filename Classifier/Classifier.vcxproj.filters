@@ -55,6 +55,9 @@
     <ClCompile Include="ClassSet.hpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="SeedsReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BayesClassifier.hpp">
@@ -185,6 +188,30 @@
     </ClInclude>
     <ClInclude Include="FrequencyVoting.hpp">
       <Filter>KNN\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="ManhattanDistance.hpp">
+      <Filter>KNN\Distance</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceVoting.hpp">
+      <Filter>KNN\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="WeightedVoting.hpp">
+      <Filter>KNN\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNGlassTest.hpp">
+      <Filter>Test\KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNEcoliTest.hpp">
+      <Filter>Test\KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="LibrasReader.hpp">
+      <Filter>Test\Readers</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNSeedsTest.hpp">
+      <Filter>Test\KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="KNNLibrasTest.hpp">
+      <Filter>Test\KNN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

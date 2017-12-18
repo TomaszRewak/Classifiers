@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassSet.hpp" />
+    <ClCompile Include="SeedsReader.hpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="DiscreteDiscretizer.hpp" />
     <ClInclude Include="DiscreteDiscretizerBuilder.hpp" />
     <ClInclude Include="BayesEcoliTest.hpp" />
+    <ClInclude Include="DistanceVoting.hpp" />
     <ClInclude Include="EcoliReader.hpp" />
     <ClInclude Include="EuclideanDistance.hpp" />
     <ClInclude Include="EvenDecimalDiscretizer.hpp" />
@@ -160,10 +162,17 @@
     <ClInclude Include="KMeansDiscretizerBuilder.hpp" />
     <ClInclude Include="KNNClassifier.hpp" />
     <ClInclude Include="KNNClassifierBuilder.hpp" />
+    <ClInclude Include="KNNEcoliTest.hpp" />
+    <ClInclude Include="KNNGlassTest.hpp" />
     <ClInclude Include="KNNIrisTest.hpp" />
+    <ClInclude Include="KNNLibrasTest.hpp" />
+    <ClInclude Include="KNNSeedsTest.hpp" />
+    <ClInclude Include="LibrasReader.hpp" />
+    <ClInclude Include="ManhattanDistance.hpp" />
     <ClInclude Include="Transformer.hpp" />
     <ClInclude Include="TransformerBuilder.hpp" />
     <ClInclude Include="ValidationStatistics.hpp" />
+    <ClInclude Include="WeightedVoting.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
