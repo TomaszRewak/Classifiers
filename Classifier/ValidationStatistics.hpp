@@ -92,17 +92,23 @@ namespace Classifier::Validation
 			fscore = fscore + second.fscore;
 			inside = inside + second.inside;
 		}
+
+		double avgFscore() const
+		{
+			return 2 * prec.value * rec.value / (prec.value + rec.value);
+		}
 	};
 
 	std::ostream& operator<<(std::ostream& stream, const ValidationStatistics& stats)
 	{
 		std::cout
 			<< stats.totalAcc << ",\t"
-			<< stats.acc << ",\t" 
+			<< stats.acc << ",\t"
 			<< stats.prec << ",\t"
-			<< stats.rec << ",\t" 
-			<< stats.fscore << ",\t"
-			<< stats.inside << ",\t";
+			<< stats.rec << ",\t"
+			<< stats.avgFscore() << ",\t";
+			//<< stats.fscore << ",\t";
+			//<< stats.inside << ",\t";
 
 		return stream;
 	}

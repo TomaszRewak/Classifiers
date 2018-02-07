@@ -14,6 +14,10 @@
 #include "BayesClassifierBuilder.hpp"
 #include "GaussianBayesClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
+#include "BaggingClassifierBuilder.hpp"
+#include "MaxOccurrenceVoting.hpp"
+#include "ErrorVoting.hpp"
+#include "LinearVoting.hpp"
 #include "EcoliReader.hpp"
 
 using namespace std;
@@ -22,10 +26,10 @@ using namespace Classifier::Data::Transformation;
 using namespace Classifier::Test::Readers;
 
 
-namespace Classifier::Test::BayesTest {
-	void ecoli_bayes_test()
+namespace Classifier::Test::BaggingTest {
+	void ecoli_bagging_test()
 	{
-		cout << "BAYES ECOLI" << endl;
+		cout << "BAGGING ECOLI" << endl;
 
 		auto[initialSet, classSet] = EcoliReader::read();
 
@@ -40,7 +44,12 @@ namespace Classifier::Test::BayesTest {
 			.transform();
 
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			Bayes::BayesClassifierBuilder::builder<string, 7>(),
+			ClassificationSet::Builders::Bagging::BaggingClassifierBuilder::builder<
+			ClassificationSet::Voting::LinearVoting<string>
+			>(
+				Bayes::BayesClassifierBuilder::builder<string, 7>(),
+				20
+				),
 			classSet,
 			featureSet
 		);

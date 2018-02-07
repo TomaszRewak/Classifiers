@@ -13,7 +13,10 @@
 #include "CrossValidatorBuilder.hpp"
 #include "IrisReader.hpp"
 #include "EuclideanDistance.hpp"
+#include "ManhattanDistance.hpp"
 #include "FrequencyVoting.hpp"
+#include "WeightedVoting.hpp"
+#include "DistanceVoting.hpp"
 
 using namespace std;
 using namespace Classifier::Data;

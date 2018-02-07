@@ -29,23 +29,142 @@ namespace Classifier::Test::KNNTest {
 
 		auto featureSet = initialSet;
 
-		auto builder = KNN::KNNClassifierBuilder::builder<
-			KNN::Distance::EuclideanDistance<90>,
-			KNN::Voting::FrequencyVoting<int>,
-			int, 90
-		>(5);
-
-		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			builder,
-			classSet,
-			featureSet
-		);
-
-		Validation::ValidationStatistics stats;
-		for (int i = 0; i < 10; i++)
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
 		{
-			stats += crossValidator.validate(10);
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::EuclideanDistance<90>,
+				KNN::Voting::FrequencyVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
 		}
-		cout << stats << endl;
+
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
+		{
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::EuclideanDistance<90>,
+				KNN::Voting::DistanceVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
+		}
+
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
+		{
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::EuclideanDistance<90>,
+				KNN::Voting::WeightedVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
+		}
+
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
+		{
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::ManhattanDistance<90>,
+				KNN::Voting::FrequencyVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
+		}
+
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
+		{
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::ManhattanDistance<90>,
+				KNN::Voting::DistanceVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
+		}
+
+		cout << "---" << endl;
+		for (int j = 1; j < 15; j++)
+		{
+			auto builder = KNN::KNNClassifierBuilder::builder<
+				KNN::Distance::ManhattanDistance<90>,
+				KNN::Voting::WeightedVoting<int>,
+				int, 90
+			>(j);
+
+			auto crossValidator = Validation::CrossValidatorBuilder::from(
+				builder,
+				classSet,
+				featureSet
+			);
+
+			Validation::ValidationStatistics stats;
+			for (int i = 0; i < 10; i++)
+			{
+				stats += crossValidator.validate(10);
+			}
+			cout << j << ",\t" << stats << endl;
+		}
 	}
 }

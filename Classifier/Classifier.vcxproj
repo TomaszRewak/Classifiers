@@ -122,8 +122,19 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaBoost.hpp" />
+    <ClInclude Include="BaggingClassifierBuilder.hpp" />
+    <ClInclude Include="BaggingCreditTest.hpp" />
+    <ClInclude Include="BaggingEcoliTest.hpp" />
+    <ClInclude Include="BaggingGlassTest.hpp" />
+    <ClInclude Include="BaggingIrisTest.hpp" />
     <ClInclude Include="BayesClassifier.hpp" />
     <ClInclude Include="BayesClassifierBuilder.hpp" />
+    <ClInclude Include="BoostingClassifierBuilder.hpp" />
+    <ClInclude Include="BoostingCreditTest.hpp" />
+    <ClInclude Include="BoostingEcoliTest.hpp" />
+    <ClInclude Include="BoostingGlassTest.hpp" />
+    <ClInclude Include="BoostingIrisTest.hpp" />
     <ClInclude Include="ConfusionMatrix.hpp" />
     <ClInclude Include="BayesCreditTest.hpp" />
     <ClInclude Include="CreditReader.hpp" />
@@ -139,6 +150,7 @@
     <ClInclude Include="BayesEcoliTest.hpp" />
     <ClInclude Include="DistanceVoting.hpp" />
     <ClInclude Include="EcoliReader.hpp" />
+    <ClInclude Include="ErrorVoting.hpp" />
     <ClInclude Include="EuclideanDistance.hpp" />
     <ClInclude Include="EvenDecimalDiscretizer.hpp" />
     <ClInclude Include="EvenDecimalDiscretizerBuilder.hpp" />
@@ -168,7 +180,11 @@
     <ClInclude Include="KNNLibrasTest.hpp" />
     <ClInclude Include="KNNSeedsTest.hpp" />
     <ClInclude Include="LibrasReader.hpp" />
+    <ClInclude Include="LinearVoting.hpp" />
     <ClInclude Include="ManhattanDistance.hpp" />
+    <ClInclude Include="MaxOccurrenceVoting.hpp" />
+    <ClInclude Include="MultiClassifiers.hpp" />
+    <ClInclude Include="MultiplyBoost.hpp" />
     <ClInclude Include="Transformer.hpp" />
     <ClInclude Include="TransformerBuilder.hpp" />
     <ClInclude Include="ValidationStatistics.hpp" />

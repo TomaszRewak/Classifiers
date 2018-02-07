@@ -47,6 +47,30 @@
     <Filter Include="KNN\Voting">
       <UniqueIdentifier>{6ade5a61-6fb4-4ed7-8e22-e87d16ef9260}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClassificationSet">
+      <UniqueIdentifier>{4fdffee4-9211-448b-b6d5-9ca43b410876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassificationSet\Voting">
+      <UniqueIdentifier>{1038a978-94f4-47e7-9680-13dd3190cf1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassificationSet\Builders">
+      <UniqueIdentifier>{3fcf5af9-ab24-4627-9379-44d489de2f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassificationSet\Builders\Bagging">
+      <UniqueIdentifier>{8d4f35bc-0ab9-48c3-988b-e9f65d8ef139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Bagging">
+      <UniqueIdentifier>{dd8e3269-00e1-4279-97c5-513df8c303b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassificationSet\Builders\Boosting">
+      <UniqueIdentifier>{0cac0850-0106-4dcb-8ab8-cdd010cd8b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Boosting">
+      <UniqueIdentifier>{049ef672-f2d7-4193-8a15-f448ca694bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ClassificationSet\Builders\Boosting\BoostingAlgorithm">
+      <UniqueIdentifier>{801b4c4e-dac4-4981-9342-0f6e52da3324}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -212,6 +236,54 @@
     </ClInclude>
     <ClInclude Include="KNNLibrasTest.hpp">
       <Filter>Test\KNN</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiClassifiers.hpp">
+      <Filter>ClassificationSet</Filter>
+    </ClInclude>
+    <ClInclude Include="BaggingClassifierBuilder.hpp">
+      <Filter>ClassificationSet\Builders\Bagging</Filter>
+    </ClInclude>
+    <ClInclude Include="BaggingIrisTest.hpp">
+      <Filter>Test\Bagging</Filter>
+    </ClInclude>
+    <ClInclude Include="MaxOccurrenceVoting.hpp">
+      <Filter>ClassificationSet\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostingClassifierBuilder.hpp">
+      <Filter>ClassificationSet\Builders\Boosting</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostingIrisTest.hpp">
+      <Filter>Test\Boosting</Filter>
+    </ClInclude>
+    <ClInclude Include="AdaBoost.hpp">
+      <Filter>ClassificationSet\Builders\Boosting\BoostingAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearVoting.hpp">
+      <Filter>ClassificationSet\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorVoting.hpp">
+      <Filter>ClassificationSet\Voting</Filter>
+    </ClInclude>
+    <ClInclude Include="BaggingGlassTest.hpp">
+      <Filter>Test\Bagging</Filter>
+    </ClInclude>
+    <ClInclude Include="BaggingEcoliTest.hpp">
+      <Filter>Test\Bagging</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostingGlassTest.hpp">
+      <Filter>Test\Boosting</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostingEcoliTest.hpp">
+      <Filter>Test\Boosting</Filter>
+    </ClInclude>
+    <ClInclude Include="BaggingCreditTest.hpp">
+      <Filter>Test\Bagging</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostingCreditTest.hpp">
+      <Filter>Test\Boosting</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplyBoost.hpp">
+      <Filter>ClassificationSet\Builders\Boosting\BoostingAlgorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

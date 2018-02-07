@@ -14,6 +14,8 @@
 #include "BayesClassifierBuilder.hpp"
 #include "GaussianBayesClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
+#include "BaggingClassifierBuilder.hpp"
+#include "MaxOccurrenceVoting.hpp"
 #include "GlassReader.hpp"
 
 using namespace std;
@@ -21,10 +23,10 @@ using namespace Classifier::Data;
 using namespace Classifier::Data::Transformation;
 using namespace Classifier::Test::Readers;
 
-namespace Classifier::Test::BayesTest {
-	void glass_bayes_test()
+namespace Classifier::Test::BaggingTest {
+	void glass_bagging_test()
 	{
-		cout << "BAYES GLASS" << endl;
+		cout << "BAGGING GLASS" << endl;
 
 		auto[initialSet, classSet] = GlassReader::read();
 
@@ -41,7 +43,12 @@ namespace Classifier::Test::BayesTest {
 			.transform();
 
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			Bayes::BayesClassifierBuilder::builder<int, 9>(),
+			ClassificationSet::Builders::Bagging::BaggingClassifierBuilder::builder<
+			ClassificationSet::Voting::MaxOccurrenceVoting<int>
+			>(
+				Bayes::BayesClassifierBuilder::builder<int, 9>(),
+				10
+				),
 			classSet,
 			featureSet
 		);

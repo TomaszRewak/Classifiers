@@ -27,7 +27,7 @@ namespace Classifier::Bayes
 		{ }
 
 		template<typename ...Ts>
-		Class classify(Data::Features<Ts...> specimen)
+		Class classify(Data::Features<Ts...>& specimen)
 		{
 			Class bestClass;
 			double bestClassProbability = -1;

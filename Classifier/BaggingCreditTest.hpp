@@ -13,6 +13,10 @@
 #include "DiscreteDiscretizerBuilder.hpp"
 #include "BayesClassifierBuilder.hpp"
 #include "CrossValidatorBuilder.hpp"
+#include "BaggingClassifierBuilder.hpp"
+#include "MaxOccurrenceVoting.hpp"
+#include "ErrorVoting.hpp"
+#include "LinearVoting.hpp"
 #include "CreditReader.hpp"
 
 using namespace std;
@@ -21,10 +25,10 @@ using namespace Classifier::Data::Transformation;
 using namespace Classifier::Test::Readers;
 
 
-namespace Classifier::Test::BayesTest {
-	void credit_bayes_test()
+namespace Classifier::Test::BaggingTest {
+	void credit_bagging_test()
 	{
-		cout << "Bayes CREDIT" << endl;
+		cout << "BAGGING CREDIT" << endl;
 
 		auto[initialSet, classSet] = CreditReader::read();
 
@@ -47,15 +51,21 @@ namespace Classifier::Test::BayesTest {
 			.transform();
 
 		auto crossValidator = Validation::CrossValidatorBuilder::from(
-			Bayes::BayesClassifierBuilder::builder<string, 15>(),
+			ClassificationSet::Builders::Bagging::BaggingClassifierBuilder::builder<
+			ClassificationSet::Voting::MaxOccurrenceVoting<string>
+			>(
+				Bayes::BayesClassifierBuilder::builder<string, 15>(),
+				20
+				),
 			classSet,
 			featureSet
 		);
-		
+
 		Validation::ValidationStatistics stats;
 		for (int i = 0; i < 100; i++)
 		{
-			cout << crossValidator.validate(10) << endl;
+			stats += crossValidator.validate(10);
 		}
+		cout << stats << endl;
 	}
 }

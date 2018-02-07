@@ -47,7 +47,7 @@ namespace Classifier::KNN
 		{ }
 
 		template<typename ...Ts>
-		Class classify(Data::Features<Ts...> specimen)
+		Class classify(Data::Features<Ts...>& specimen)
 		{
 			candidates.clear();
 

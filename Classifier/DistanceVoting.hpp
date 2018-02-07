@@ -13,7 +13,7 @@ namespace Classifier::KNN::Voting
 	public:
 		Class select(Candidates& candidates)
 		{
-			std::map<Class, int> distances;
+			std::map<Class, double> distances;
 
 			for (auto& candidate : candidates)
 				distances[candidate.value] += 1 / candidate.distance;

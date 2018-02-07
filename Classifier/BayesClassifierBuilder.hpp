@@ -14,7 +14,11 @@ namespace Classifier::Bayes
 
 		template<typename Class, typename ...Ts>
 		struct Builder {
-			BayesClassifier<Class, sizeof...(Ts)> operator()(Classes<Class>& classes, Features<Ts...>& features)
+			using classifier_type = BayesClassifier<Class, sizeof...(Ts)>;
+			using class_type = Class;
+			using features_type = Data::Features<Ts...>;
+
+			classifier_type operator()(Classes<Class>& classes, Features<Ts...>& features)
 			{
 				ClassCardinality<Class, sizeof...(Ts)> classCardinality;
 				FeaturesCardinality<Class, sizeof...(Ts)> featuresCardinality;
@@ -34,7 +38,7 @@ namespace Classifier::Bayes
 					}
 				}
 
-				return BayesClassifier<Class, sizeof...(Ts)>(classCardinality, featuresCardinality);
+				return classifier_type(classCardinality, featuresCardinality);
 			}
 		};
 

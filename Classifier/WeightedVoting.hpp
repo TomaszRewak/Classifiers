@@ -13,12 +13,12 @@ namespace Classifier::KNN::Voting
 	public:
 		Class select(Candidates& candidates)
 		{
-			std::map<Class, int> weights;
+			std::map<Class, double> weights;
 
 			double weight = 1;
 			for (auto& candidate : candidates) {
 				weights[candidate.value] += weight;
-				weight -= 1 / candidates.size();
+				weight -= 1. / candidates.size();
 			}
 
 			Class best;
